@@ -1,3 +1,59 @@
-<h1>
-  {{title}}
-</h1>
+<div id="wrapper">
+  <div class="header">
+
+    <div class="manager-photo-conrainer">
+      <img *ngIf="imageUrl" src="{{imageUrl}}" class="manager-photo" alt="manager photo">
+    </div>
+    <h3 class="manager-name">Виталий Дувалко</h3>
+    <div class="manager-position">Менеджер по продажам</div>
+    <div class="manager-status">Подберу для вас самые лучшие предложения.
+      Мои услуги абсолютно бесплатны
+    </div>
+    <div class="container">
+      <table class="manager-service-counter">
+        <tr class="table-header">
+          <th></th>
+          <th><span class="count">Услуг</span></th>
+        </tr>
+        <tr class="table-content reserved">
+          <td><div class="line"><div class="mark"></div><div class="mark-title">Ручное бронирование</div></div></td>
+          <td><span class="count">11</span></td>
+        </tr>
+        <tr class="table-content tours">
+          <td><div class="line"><div class="mark"></div><div class="mark-title">Пакетные туры</div></div></td>
+          <td><span class="count">3</span></td>
+        </tr>
+        <tr class="table-content hostels">
+          <td><div class="line"><div class="mark"></div><div class="mark-title">Отели</div></div></td>
+          <td><span class="count">1</span></td>
+        </tr>
+        <tr class="all">
+          <td>Всего</td>
+          <td><span class="count">15</span></td>
+        </tr>
+      </table>
+    </div>
+
+  </div>
+
+
+
+  <div class="chat">
+    <div *ngFor="let comment of comments">
+      <div class="time">
+        {{comment.date | date:'mediumDate'}}
+      </div>
+      <div class="comment answer" *ngIf="comment.answer; else visitor_comment ">
+        {{comment.content}}
+      </div>
+      <ng-template #visitor_comment class="comment">
+        <div class="comment">{{comment.content}}</div>
+      </ng-template>
+    </div>
+  </div>
+  <div *ngIf="manager">You are root</div>
+  <textarea *ngIf="user" [(ngModel)]="comment"></textarea>
+  <button (click)="addComment()" *ngIf="user">Написать разработчику</button>
+  <button (click)="loginIn()" *ngIf="!user">Log-in</button>
+  <button (click)="logOut()" *ngIf="user">Log-Out</button>
+</div>
