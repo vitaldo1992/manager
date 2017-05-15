@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
+import { Autosize } from 'angular2-autosize/src/autosize.directive';
+
 import { AppComponent } from './app.component';
 
 import { FireBaseConfig } from '../environments/firebase';
@@ -15,7 +17,8 @@ import { AngularFireAuthModule, AngularFireAuth } from 'angularfire2/auth';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    Autosize
   ],
   imports: [
     BrowserModule,

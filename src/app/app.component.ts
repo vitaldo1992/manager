@@ -31,7 +31,7 @@ export class AppComponent implements OnInit {
       }
     });
     authService.db.list('comments').subscribe(comments => {
-      this.comments = comments;
+      this.comments = comments.slice(-3);
     });
 
     let storageRef = firebase.storage().ref();

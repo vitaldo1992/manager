@@ -2,9 +2,9 @@
   <div class="header">
 
     <div class="manager-photo-conrainer">
-      <img *ngIf="imageUrl" src="{{imageUrl}}" class="manager-photo" alt="manager photo">
+      <img src="./assets/images/my-face-1x.png" class="manager-photo" alt="manager photo">
     </div>
-    <h3 class="manager-name">Виталий Дувалко</h3>
+    <h3 class="manager-name">Vitaliy Duvalko</h3>
     <div class="manager-position">Менеджер по продажам</div>
     <div class="manager-status">Подберу для вас самые лучшие предложения.
       Мои услуги абсолютно бесплатны
@@ -37,23 +37,40 @@
   </div>
 
 
+  <div class="review">
+    Последние отзывы <a href="#">Все отзывы</a>
+    <span class="like-count"><span class="like-icon"></span>131</span>
+    <span class="posts-count" *ngIf="comments"><span class="posts-icon"></span>{{comments.length}}</span>
+  </div>
 
-  <div class="chat">
-    <div *ngFor="let comment of comments">
-      <div class="time">
-        {{comment.date | date:'mediumDate'}}
+  <div class="chat" *ngIf="comments; else messages">
+    <div *ngFor="let comment of comments" [ngClass]="{'answer': comment.answer, 'comment': true}">
+      <div class="message-info">
+        <div class="user-name">{{comment.userName}}</div>
+        <div class="time" *ngIf="!comment.answer">
+          {{comment.date | date:'mediumDate'}}
+        </div>
       </div>
-      <div class="comment answer" *ngIf="comment.answer; else visitor_comment ">
+      <div class="comment_content">
         {{comment.content}}
       </div>
-      <ng-template #visitor_comment class="comment">
-        <div class="comment">{{comment.content}}</div>
-      </ng-template>
+    </div>
+    <div *ngIf="!comments.length" class="no-reviews">
+      Здесь пока нет отзывов
     </div>
   </div>
-  <div *ngIf="manager">You are root</div>
-  <textarea *ngIf="user" [(ngModel)]="comment"></textarea>
-  <button (click)="addComment()" *ngIf="user">Написать разработчику</button>
-  <button (click)="loginIn()" *ngIf="!user">Log-in</button>
-  <button (click)="logOut()" *ngIf="user">Log-Out</button>
+
+  <ng-template #messages>
+    <div  class="message-load">
+      <img src="./assets/images/giphy.gif" alt="loading">
+    </div>
+    <!-- Сообщений пока нет -->
+  </ng-template>
+
+  <div class="footer">
+    <textarea autosize [disabled]="!user" [(ngModel)]="comment" class="write-msg" (keydown.control.Enter)="addComment()"></textarea>
+    <button (click)="addComment()" [disabled]="!user" class="action-btn add-msg">Написать консультанту</button>
+    <button (click)="loginIn()" *ngIf="!user" class="action-btn">Log-in</button>
+    <button (click)="logOut()" *ngIf="user" class="action-btn">Log-Out</button>
+  </div>
 </div>
