@@ -53,7 +53,7 @@ input:focus::-webkit-input-placeholder{color: #000;}
 #wrapper {
 	width: 100%;
 	max-width: 720px;
-	min-height: 100%;
+	min-height: 100vh;
 	height: auto;
 	position: absolute;
 	top: 0;
@@ -348,7 +348,7 @@ input:focus::-webkit-input-placeholder{color: #000;}
 	display: block;
 	overflow: hidden;
 	box-sizing: border-box;
-	padding: 5% 4%;
+	padding: 15px 4%;
 	text-align: center;
 }
 .write-msg {
